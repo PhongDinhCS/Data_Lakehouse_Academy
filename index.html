@@ -3,230 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataAnalystPro - 2026 Career Ready Syllabus</title>
+    <title>Data Lakehouse Academy | PYfami</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .active-tab {
-            color: #2563eb;
-            border-bottom: 2px solid #2563eb;
+        :root {
+            --brand-green: #10b981; /* Emerald 500 */
+            --brand-green-dark: #059669; /* Emerald 600 */
+            --brand-blue: #0ea5e9; /* Sky 500 */
+            --brand-blue-dark: #0284c7; /* Sky 600 */
+            --navy-deep: #0f172a; /* Slate 900 */
         }
-        .tab-content {
-            display: none;
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
         }
-        .tab-content.active {
-            display: block;
+        .medallion-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .medallion-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .animate-in {
-            animation: fadeIn 0.4s ease-out forwards;
+        .bronze { border-top: 6px solid #cd7f32; }
+        .silver { border-top: 6px solid #c0c0c0; }
+        .gold { border-top: 6px solid #ffd700; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .bg-brand-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, var(--brand-green), var(--brand-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-900 font-sans">
+<body class="bg-gray-50 text-slate-900">
 
-    <!-- Header -->
-    <header class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-200 text-white">
-                    <i class="fas fa-chart-line w-6 h-6 flex items-center justify-center"></i>
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-black tracking-tighter text-slate-900">PY<span class="text-emerald-500">fami</span></span>
+                    <div class="ml-4 pl-4 border-l border-slate-300 hidden md:block">
+                        <span class="text-xs font-bold tracking-widest text-slate-500 uppercase">Data Lakehouse Academy</span>
+                    </div>
                 </div>
-                <h1 class="text-xl font-bold tracking-tight">DataAnalyst<span class="text-blue-600">Pro</span></h1>
+                <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                    <a href="#home" class="text-slate-600 hover:text-emerald-500 transition">Home</a>
+                    <a href="#courses" class="text-slate-600 hover:text-emerald-500 transition">Curriculum</a>
+                    <a href="#architecture" class="text-slate-600 hover:text-emerald-500 transition">Medallion</a>
+                    <a href="#hands-on" class="text-slate-600 hover:text-emerald-500 transition">Lab Tools</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-slate-600"><i class="fas fa-bars text-xl"></i></button>
+                </div>
             </div>
-            <nav class="hidden md:flex gap-6 font-medium text-slate-600">
-                <button onclick="switchTab('syllabus')" id="tab-btn-syllabus" class="tab-btn active-tab hover:text-blue-600 pb-1">Syllabus</button>
-                <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn hover:text-blue-600 pb-1">Free Tools</button>
-                <button onclick="switchTab('project')" id="tab-btn-project" class="tab-btn hover:text-blue-600 pb-1">Capstone</button>
-                <button onclick="switchTab('share')" id="tab-btn-share" class="tab-btn hover:text-blue-600 pb-1 flex items-center gap-1">
-                    <i class="fas fa-share-alt text-xs"></i> Share
-                </button>
-            </nav>
-            <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition">Start Free</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative overflow-hidden bg-brand-gradient text-white py-28 px-4">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(var(--brand-green) 1px, transparent 1px); background-size: 40px 40px;"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto text-center">
+            <div class="inline-block border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-[10px] font-black px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest">
+                Professional Education by PYfami
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">Master the Modern<br><span class="text-gradient">Data Engineering</span> Stack</h1>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-slate-400 font-light">Comprehensive training following Associate Certification concepts. Build your foundation in Data Engineering & Analytics using the Databricks Lakehouse ecosystem.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#courses" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-900/40 transition-all">Start Learning</a>
+                <a href="#hands-on" class="bg-sky-600 text-white px-10 py-4 rounded-full font-bold hover:bg-sky-700 shadow-lg shadow-sky-900/40 transition-all">Explore Labs</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-20 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="inline-block px-3 py-1 bg-blue-500/30 rounded-full text-blue-200 text-sm font-semibold mb-4 border border-blue-400/30">2026 Career Ready Syllabus</span>
-            <h2 class="text-4xl md:text-6xl font-extrabold mb-6">Master Modern Data Analytics</h2>
-            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-                Learn the <strong>Medallion Architecture</strong> using Microsoft's free ecosystem. Transform raw data into gold-standard business insights.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/10">
-                    <i class="fas fa-fire text-orange-400"></i>
-                    <span>Bronze (Raw)</span>
-                </div>
-                <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/10">
-                    <div class="w-3 h-3 bg-slate-300 rounded-full"></div>
-                    <span>Silver (Clean)</span>
-                </div>
-                <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/10">
-                    <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <span>Gold (Logic)</span>
-                </div>
+    <!-- Medallion Architecture -->
+    <section id="architecture" class="py-20 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-black mb-4 uppercase tracking-tight">The Medallion Framework</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">The industry standard for organizing data quality and reliability in a Lakehouse environment.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 medallion-card bronze">
+                <h3 class="text-xl font-bold mb-3">Bronze: Ingestion</h3>
+                <p class="text-slate-600 text-sm mb-6 leading-relaxed">The Raw zone where source data lands. Focus on data preservation, lineage, and high-frequency ingestion.</p>
+                <div class="flex items-center text-xs font-bold text-emerald-600"><i class="fas fa-flask mr-2"></i>LAB: Databricks Auto Loader</div>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 medallion-card silver">
+                <h3 class="text-xl font-bold mb-3">Silver: Transformation</h3>
+                <p class="text-slate-600 text-sm mb-6 leading-relaxed">Cleaning, filtering, and joining. Focus on schema enforcement, data quality rules, and deduplication.</p>
+                <div class="flex items-center text-xs font-bold text-emerald-600"><i class="fas fa-flask mr-2"></i>LAB: Spark SQL & Python</div>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 medallion-card gold">
+                <h3 class="text-xl font-bold mb-3">Gold: Business Ready</h3>
+                <p class="text-slate-600 text-sm mb-6 leading-relaxed">Highly aggregated and project-specific. Focus on dimensional modeling (Star Schema) for final consumption.</p>
+                <div class="flex items-center text-xs font-bold text-emerald-600"><i class="fas fa-flask mr-2"></i>LAB: Databricks SQL Warehouse</div>
             </div>
         </div>
     </section>
 
-    <!-- Main Content Area -->
-    <main class="max-w-6xl mx-auto px-4 py-12">
-        
-        <!-- Syllabus Tab -->
-        <div id="content-syllabus" class="tab-content active animate-in">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Module 1 -->
-                <div class="p-6 rounded-2xl bg-white border-2 border-slate-100 shadow-sm hover:shadow-md transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 rounded-xl bg-blue-50 transition-transform group-hover:scale-110">
-                            <i class="fas fa-book-open text-blue-500 text-xl"></i>
-                        </div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Module 1</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-1">Foundations & Architecture</h3>
-                    <p class="text-sm text-blue-600 font-semibold mb-4">Beginner</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Modern Data Lakehouse vs Warehouse</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Medallion Architecture Theory</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Microsoft Fabric Ecosystem</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Setting up Free Dev Environment</li>
-                    </ul>
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl font-black uppercase">Career Tracks</h2>
+                    <p class="text-slate-500">Structured following Associate Certification objectives.</p>
                 </div>
-                <!-- Module 2 -->
-                <div class="p-6 rounded-2xl bg-white border-2 border-orange-400 shadow-sm hover:shadow-md transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 rounded-xl bg-orange-50 transition-transform group-hover:scale-110">
-                            <i class="fas fa-database text-orange-600 text-xl"></i>
-                        </div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Module 2</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-1">Bronze Layer: Ingestion</h3>
-                    <p class="text-sm text-blue-600 font-semibold mb-4">Hands-on</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Data Factory & Pipelines</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Ingesting Dirty CSV/JSON</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Schema-on-read principles</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> OneLake Storage basics</li>
-                    </ul>
-                </div>
-                <!-- Add other modules similarly... simplified for brevity here -->
-                <!-- Module 3 -->
-                <div class="p-6 rounded-2xl bg-white border-2 border-slate-300 shadow-sm hover:shadow-md transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 rounded-xl bg-slate-50 transition-transform group-hover:scale-110">
-                            <i class="fas fa-microchip text-slate-500 text-xl"></i>
-                        </div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Module 3</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-1">Silver Layer: Transformation</h3>
-                    <p class="text-sm text-blue-600 font-semibold mb-4">Intermediate</p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> PySpark & Spark SQL in Notebooks</li>
-                        <li class="flex items-center gap-2 text-slate-600 text-sm"><i class="fas fa-chevron-right text-blue-500 text-[10px]"></i> Data Cleansing (Nulls, Duplicates)</li>
-                    </ul>
+                <div class="inline-flex bg-white shadow-inner rounded-xl p-1.5 border border-slate-200">
+                    <button onclick="switchTab('engineer')" id="btn-engineer" class="px-6 py-3 rounded-lg font-bold text-sm transition-all bg-emerald-600 text-white shadow-lg">Data Engineering</button>
+                    <button onclick="switchTab('analyst')" id="btn-analyst" class="px-6 py-3 rounded-lg font-bold text-sm transition-all text-slate-500">Data Analytics</button>
                 </div>
             </div>
-        </div>
 
-        <!-- Tools Tab -->
-        <div id="content-tools" class="tab-content animate-in">
-            <div class="max-w-3xl mx-auto space-y-8">
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-bold mb-2">Zero-Cost Tech Stack</h2>
-                    <p class="text-slate-600">Master the tools used by Fortune 500 companies without a credit card.</p>
-                </div>
-                <div class="flex items-center justify-between p-6 bg-white rounded-2xl border shadow-sm hover:border-blue-200 transition-colors">
-                    <div>
-                        <h4 class="font-bold">Microsoft Fabric</h4>
-                        <p class="text-slate-500 text-sm">All-in-one analytics platform (Free Trial)</p>
+            <!-- Data Engineer Content -->
+            <div id="engineer-content" class="tab-content active">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="text-2xl font-bold mb-4">Core Concepts: Data Engineer Associate</h3>
+                            <p class="text-slate-600 mb-8">This track covers the fundamental lifecycle of data engineering: from collection and storage to transformation and orchestration.</p>
+                            
+                            <div class="grid sm:grid-cols-2 gap-8">
+                                <div class="space-y-4">
+                                    <h4 class="font-bold flex items-center text-emerald-600"><i class="fas fa-database mr-2"></i> Data Storage & Modeling</h4>
+                                    <ul class="text-sm text-slate-500 space-y-2">
+                                        <li>• Relational vs Non-relational systems</li>
+                                        <li>• Delta Lake & Transaction Logs</li>
+                                        <li>• Schema Evolution and Enforcement</li>
+                                        <li>• Partitioning & Z-Order Optimization</li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-4">
+                                    <h4 class="font-bold flex items-center text-emerald-600"><i class="fas fa-code-branch mr-2"></i> Processing & Orchestration</h4>
+                                    <ul class="text-sm text-slate-500 space-y-2">
+                                        <li>• Batch vs Streaming paradigms</li>
+                                        <li>• ELT (Extract-Load-Transform) patterns</li>
+                                        <li>• Workflow Dependency Management</li>
+                                        <li>• Data Quality Monitoring (Expectations)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="https://fabric.microsoft.com" target="_blank" class="text-blue-600 font-semibold hover:underline bg-blue-50 px-3 py-1 rounded-lg">
-                        Source <i class="fas fa-external-link-alt text-xs"></i>
-                    </a>
-                </div>
-                <div class="p-8 bg-blue-600 rounded-3xl text-white shadow-xl shadow-blue-200">
-                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2">
-                        <i class="fas fa-code"></i> Pro Tip: Microsoft Fabric Developer Account
-                    </h3>
-                    <p class="text-blue-100 opacity-90 leading-relaxed">
-                        Sign up for the "Microsoft 365 Developer Program" to get a persistent free E5 sandbox.
-                    </p>
+                    <div class="bg-emerald-900 text-white p-8 rounded-2xl shadow-xl">
+                        <h3 class="font-bold text-xl mb-6 flex items-center"><i class="fas fa-vial mr-3 text-emerald-400"></i>Hand-on Syllabus</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-2 border-emerald-500 pl-4">
+                                <span class="text-[10px] font-black text-emerald-400 block mb-1 uppercase tracking-tighter">Project 01</span>
+                                <p class="text-sm font-bold">Building a Multi-hop Pipeline</p>
+                                <p class="text-xs text-emerald-100/60 mt-1">Implement Bronze-Silver-Gold using Spark SQL on Databricks CE.</p>
+                            </div>
+                            <div class="border-l-2 border-emerald-800 pl-4">
+                                <span class="text-[10px] font-black text-emerald-600 block mb-1 uppercase tracking-tighter">Project 02</span>
+                                <p class="text-sm font-bold">Automated Ingestion</p>
+                                <p class="text-xs text-emerald-100/60 mt-1">Using Auto Loader to process landing files in real-time.</p>
+                            </div>
+                            <div class="border-l-2 border-emerald-800 pl-4">
+                                <span class="text-[10px] font-black text-emerald-600 block mb-1 uppercase tracking-tighter">Project 03</span>
+                                <p class="text-sm font-bold">Data Governance</p>
+                                <p class="text-xs text-emerald-100/60 mt-1">Configuring Unity Catalog (Simulated) for access control.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Capstone Tab -->
-        <div id="content-project" class="tab-content animate-in">
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-3xl border-2 border-dashed border-blue-200 p-8 md:p-12">
-                    <h2 class="text-3xl font-extrabold mb-4 italic text-blue-900">Capstone: The E-Commerce Data Engine</h2>
-                    <p class="text-slate-600 mb-8">Build a live production-ready data pipeline for a mock retail giant.</p>
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">1</div>
-                            <div>
-                                <h4 class="font-bold">Bronze Capture</h4>
-                                <p class="text-slate-500 text-sm text-sm">Automate a Daily API pull of Sales JSON into OneLake.</p>
+            <!-- Data Analyst Content -->
+            <div id="analyst-content" class="tab-content">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="text-2xl font-bold mb-4">Core Concepts: Data Analyst Associate</h3>
+                            <p class="text-slate-600 mb-8">Focus on translating complex data into actionable business value through modeling, analysis, and visualization.</p>
+                            
+                            <div class="grid sm:grid-cols-2 gap-8">
+                                <div class="space-y-4">
+                                    <h4 class="font-bold flex items-center text-sky-600"><i class="fas fa-chart-area mr-2"></i> Data Preparation</h4>
+                                    <ul class="text-sm text-slate-500 space-y-2">
+                                        <li>• Profiling and Cleaning datasets</li>
+                                        <li>• Defining Relationships (Fact/Dimensions)</li>
+                                        <li>• Calculation Logic (Aggregations)</li>
+                                        <li>• Time Intelligence analysis</li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-4">
+                                    <h4 class="font-bold flex items-center text-sky-600"><i class="fas fa-eye mr-2"></i> Insights & Storytelling</h4>
+                                    <ul class="text-sm text-slate-500 space-y-2">
+                                        <li>• Effective Visual Selection</li>
+                                        <li>• Dashboard UX/UI Principles</li>
+                                        <li>• Advanced SQL Analytics (Window functions)</li>
+                                        <li>• Sharing & Collaboration workflows</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-sky-900 text-white p-8 rounded-2xl shadow-xl">
+                        <h3 class="font-bold text-xl mb-6 flex items-center"><i class="fas fa-vial mr-3 text-sky-400"></i>Hand-on Syllabus</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-2 border-sky-500 pl-4">
+                                <span class="text-[10px] font-black text-sky-400 block mb-1 uppercase tracking-tighter">Project 01</span>
+                                <p class="text-sm font-bold">Lakehouse Discovery</p>
+                                <p class="text-xs text-sky-100/60 mt-1">Exploratory Data Analysis (EDA) using Databricks SQL.</p>
+                            </div>
+                            <div class="border-l-2 border-sky-800 pl-4">
+                                <span class="text-[10px] font-black text-sky-600 block mb-1 uppercase tracking-tighter">Project 02</span>
+                                <p class="text-sm font-bold">The Gold Model</p>
+                                <p class="text-xs text-sky-100/60 mt-1">Creating Business-Ready views for BI tools.</p>
+                            </div>
+                            <div class="border-l-2 border-sky-800 pl-4">
+                                <span class="text-[10px] font-black text-sky-600 block mb-1 uppercase tracking-tighter">Project 03</span>
+                                <p class="text-sm font-bold">Insight Dashboarding</p>
+                                <p class="text-xs text-sky-100/60 mt-1">Building a "C-Level" dashboard in Databricks SQL Workspace.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Share Tab -->
-        <div id="content-share" class="tab-content animate-in">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4 italic text-blue-900">Host & Share This Page</h2>
-                    <p class="text-slate-600">Want to allow your friends to use this dashboard?</p>
+    <!-- Hands-on Details -->
+    <section id="hands-on" class="py-24 max-w-7xl mx-auto px-4">
+        <div class="bg-white rounded-3xl p-8 md:p-16 border border-slate-200 flex flex-col md:flex-row gap-12 items-center">
+            <div class="md:w-1/2">
+                <div class="bg-emerald-50 text-emerald-600 text-xs font-black px-4 py-2 rounded-full inline-block mb-6 uppercase">Learning Environment</div>
+                <h2 class="text-4xl font-black mb-6">Databricks Community Edition</h2>
+                <p class="text-slate-600 mb-8 leading-relaxed">We use the 100% free **Community Edition** for all labs. Students learn standard Spark, SQL, and Delta Lake commands that are transferable to any cloud (Azure, AWS, or GCP).</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center text-sm font-bold"><i class="fas fa-check-circle text-emerald-500 mr-3"></i> 15GB Cluster (Free Forever)</li>
+                    <li class="flex items-center text-sm font-bold"><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Collaborative Notebooks (SQL/Python)</li>
+                    <li class="flex items-center text-sm font-bold"><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Delta Lake ACID Storage</li>
+                </ul>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center text-center hover:border-emerald-200 transition">
+                    <i class="fas fa-terminal text-3xl mb-4 text-emerald-500"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Spark SQL</span>
                 </div>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
-                        <i class="fas fa-bolt text-black mb-4 block text-xl"></i>
-                        <h4 class="font-bold text-lg mb-2">Vercel</h4>
-                        <p class="text-slate-500 text-sm mb-4">Fastest way to deploy static sites.</p>
-                        <a href="https://vercel.com" target="_blank" class="block text-center bg-slate-50 py-2 rounded-lg border font-bold text-sm">Visit Vercel</a>
-                    </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center text-center hover:border-emerald-200 transition">
+                    <i class="fab fa-python text-3xl mb-4 text-emerald-500"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-500">PySpark</span>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center text-center hover:border-sky-200 transition">
+                    <i class="fas fa-layer-group text-3xl mb-4 text-sky-500"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Delta Lake</span>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center text-center hover:border-sky-200 transition">
+                    <i class="fas fa-shield-alt text-3xl mb-4 text-sky-500"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-500">Governance</span>
                 </div>
             </div>
         </div>
-
-    </main>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 mt-20">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <p class="mb-4">© 2026 Data Analyst Learning Path. Built for the future of Data Engineering.</p>
-            <div class="flex justify-center gap-6 text-sm">
-                <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                <a href="#" class="hover:text-white transition-colors flex items-center gap-1"><i class="fab fa-github"></i> Github Repo</a>
-                <a href="#" class="hover:text-white transition-colors">Community</a>
+    <footer class="bg-slate-950 text-white py-20 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-3xl font-black mb-4">PY<span class="text-emerald-500">fami</span></p>
+            <p class="text-slate-500 text-sm max-w-md mx-auto mb-10 font-light">Empowering the next generation of data professionals through open-standards education and hands-on practice.</p>
+            <div class="flex justify-center space-x-8">
+                <a href="#" class="text-slate-600 hover:text-emerald-500 transition"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="#" class="text-slate-600 hover:text-sky-500 transition"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-slate-600 hover:text-emerald-500 transition"><i class="fab fa-youtube text-2xl"></i></a>
+            </div>
+            <div class="mt-16 pt-8 border-t border-slate-900 text-[10px] text-slate-700 font-black uppercase tracking-widest">
+                Data_Lakehouse_Academy © 2024
             </div>
         </div>
     </footer>
 
     <script>
-        function switchTab(tabId) {
-            // Update buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active-tab');
-            });
-            document.getElementById('tab-btn-' + tabId).classList.add('active-tab');
+        function switchTab(type) {
+            const btnEng = document.getElementById('btn-engineer');
+            const btnAna = document.getElementById('btn-analyst');
+            const contentEng = document.getElementById('engineer-content');
+            const contentAna = document.getElementById('analyst-content');
 
-            // Update content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById('content-' + tabId).classList.add('active');
-            
-            // Scroll to top of content area
-            window.scrollTo({ top: document.querySelector('main').offsetTop - 100, behavior: 'smooth' });
+            if (type === 'engineer') {
+                btnEng.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
+                btnEng.classList.remove('text-slate-500');
+                btnAna.classList.remove('bg-sky-600', 'text-white', 'shadow-lg');
+                btnAna.classList.add('text-slate-500');
+                
+                contentEng.classList.add('active');
+                contentAna.classList.remove('active');
+            } else {
+                btnAna.classList.add('bg-sky-600', 'text-white', 'shadow-lg');
+                btnAna.classList.remove('text-slate-500');
+                btnEng.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
+                btnEng.classList.add('text-slate-500');
+
+                contentAna.classList.add('active');
+                contentEng.classList.remove('active');
+            }
         }
     </script>
 </body>
