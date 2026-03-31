@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus | PYfami Data Lakehouse Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .sticky-nav { top: 64px; }
+        .tool-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; }
+        .bg-databricks { background-color: #FF3621; color: white; }
+        .bg-spark { background-color: #E25A1C; color: white; }
+        .bg-sql { background-color: #336791; color: white; }
+        .bg-kafka { background-color: #000000; color: white; }
+        .bg-airflow { background-color: #017CEE; color: white; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
 
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-blue-600">PYfami</span>
+                    <span class="hidden md:block text-slate-500 font-medium tracking-tight">DATA LAKEHOUSE TRAINING</span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm font-semibold uppercase tracking-wider">
+                    <a href="#overview" class="hover:text-blue-600 transition">Overview</a>
+                    <a href="#phase1" class="hover:text-blue-600 transition">Phase 1: Analyst</a>
+                    <a href="#phase2" class="hover:text-blue-600 transition">Phase 2: Engineer</a>
+                    <a href="#methodology" class="hover:text-blue-600 transition">Methodology</a>
+                </div>
+                <a href="#contact" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition">Enroll</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="pt-24 pb-12 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6">
+                <div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold mb-2">Data Lakehouse Engineering & Analytics</h1>
+                    <p class="text-blue-300 text-lg">Detailed Training Syllabus & Roadmap (6 Months)</p>
+                </div>
+                <div class="bg-white/10 p-4 rounded-xl border border-white/20 backdrop-blur-sm min-w-[250px]">
+                    <div class="flex justify-between mb-1 text-sm"><span class="text-slate-300">Duration:</span> <span>24 Weeks</span></div>
+                    <div class="flex justify-between mb-1 text-sm"><span class="text-slate-300">Sessions:</span> <span>72 (3/Week)</span></div>
+                    <div class="flex justify-between text-sm"><span class="text-slate-300">Hands-on:</span> <span class="text-green-400 font-bold">80%</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Learning Objectives Grid -->
+    <section id="overview" class="py-12 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold mb-8 flex items-center"><i class="fa-solid fa-bullseye text-blue-600 mr-3"></i>Learning Objectives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <h3 class="font-bold text-blue-600 mb-4 uppercase text-sm tracking-widest">Data Analyst Core Skills</h3>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 text-sm"></i> <span>Query & analyze data using <strong>Spark SQL</strong> on Databricks</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 text-sm"></i> <span>Transform raw data into structured <strong>Silver/Gold</strong> datasets</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 text-sm"></i> <span>Build automated dashboards & business insights</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 text-sm"></i> <span>Apply <strong>Fact/Dimension</strong> modeling for Lakehouse</span></li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <h3 class="font-bold text-orange-600 mb-4 uppercase text-sm tracking-widest">Data Engineer Core Skills</h3>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-orange-500 mt-1 mr-2 text-sm"></i> <span>Design end-to-end <strong>Medallion Architecture</strong> pipelines</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-orange-500 mt-1 mr-2 text-sm"></i> <span>Implement <strong>Batch & Streaming</strong> (Kafka + Spark)</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-orange-500 mt-1 mr-2 text-sm"></i> <span>Orchestrate complex workflows using <strong>Apache Airflow</strong></span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-orange-500 mt-1 mr-2 text-sm"></i> <span>Performance tuning & <strong>Delta Lake</strong> optimization</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Syllabus -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <!-- PHASE 1 -->
+        <div id="phase1" class="mb-20">
+            <div class="flex items-center justify-between mb-8 border-b-2 border-blue-600 pb-2">
+                <h2 class="text-3xl font-extrabold text-slate-900">PHASE 1: Data Analyst</h2>
+                <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold uppercase">Weeks 1 — 8</span>
+            </div>
+            
+            <div class="space-y-12">
+                <!-- Week 1-2 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Fundamentals</h3>
+                        <p class="text-sm text-slate-500">Weeks 1-2</p>
+                        <div class="mt-4 flex gap-2">
+                            <span class="tool-tag bg-databricks">Databricks</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-blue-600 text-sm uppercase mb-2">Core Concepts</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                    <li>Data Lakehouse vs Warehouse Architecture</li>
+                                    <li>Medallion Design Pattern (Bronze/Silver/Gold)</li>
+                                    <li>Databricks Workspace, Clusters & Notebooks</li>
+                                    <li>DBFS & Cloud Object Storage Fundamentals</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-600 text-sm uppercase mb-2">Hands-on Lab</h4>
+                                <p class="text-sm text-slate-600 italic">"First Lakehouse Explorer"</p>
+                                <p class="text-sm text-slate-700 mt-2">Setting up Databricks Community, uploading raw CSV files to DBFS, and performing basic data reads using PySpark/SQL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 3-4 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Advanced SQL</h3>
+                        <p class="text-sm text-slate-500">Weeks 3-4</p>
+                        <div class="mt-4 flex gap-2">
+                            <span class="tool-tag bg-sql">Spark SQL</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-blue-600 text-sm uppercase mb-2">Core Concepts</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                    <li>CTEs & Complex Subqueries</li>
+                                    <li>Window Functions (RANK, LEAD, LAG)</li>
+                                    <li>Handling Nested Data (JSON/Arrays) in SQL</li>
+                                    <li>Optimizing query execution plans</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-600 text-sm uppercase mb-2">Hands-on Lab</h4>
+                                <p class="text-sm text-slate-600 italic">"Business Intelligence Queries"</p>
+                                <p class="text-sm text-slate-700 mt-2">Solving 10 real-world business cases: Revenue growth MoM, Top 5 customers per region, and churn indicators.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 5-6 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Data Transformation</h3>
+                        <p class="text-sm text-slate-500">Weeks 5-6</p>
+                        <div class="mt-4 flex gap-2">
+                            <span class="tool-tag bg-databricks">Delta Lake</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-blue-600 text-sm uppercase mb-2">Core Concepts</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                    <li>Bronze Layer: Schema-on-Read</li>
+                                    <li>Silver Layer: Cleansing, deduplication & NULL handling</li>
+                                    <li>Delta Lake basics: ACID transactions & Time Travel</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-600 text-sm uppercase mb-2">Hands-on Lab</h4>
+                                <p class="text-sm text-slate-600 italic">"Silver Pipeline Builder"</p>
+                                <p class="text-sm text-slate-700 mt-2">Writing SQL/PySpark notebooks to clean raw telematics data, enforcing schema, and storing as Delta tables.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 7-8 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Modeling & BI</h3>
+                        <p class="text-sm text-slate-500">Weeks 7-8</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tool-tag bg-slate-800 text-white">Modeling</span>
+                            <span class="tool-tag bg-yellow-500 text-white">Power BI</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-blue-600 text-sm uppercase mb-2">Core Concepts</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                    <li>Star Schema Design in Lakehouse</li>
+                                    <li>Fact vs Dimension Tables</li>
+                                    <li>KPI Definition & Dashboard Storytelling</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-600 text-sm uppercase mb-2">Final Project (P1)</h4>
+                                <p class="text-sm text-slate-600 italic text-blue-600 font-bold">"Lakehouse Analytics Project"</p>
+                                <p class="text-sm text-slate-700 mt-2">Full end-to-end notebook pipeline from Raw to a curated Gold layer with a Power BI dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div id="phase2" class="mb-20">
+            <div class="flex items-center justify-between mb-8 border-b-2 border-orange-600 pb-2">
+                <h2 class="text-3xl font-extrabold text-slate-900">PHASE 2: Data Engineer</h2>
+                <span class="bg-orange-600 text-white px-4 py-1 rounded-full text-sm font-bold uppercase">Weeks 9 — 24</span>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Month 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Month 3: PySpark & Medallion Deep Dive</h3>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tool-tag bg-spark">PySpark</span>
+                            <span class="tool-tag bg-databricks">Delta Lake</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-2 border-slate-100">
+                                <span class="font-bold text-slate-700">Topic: Scalable Transformations</span>
+                                <span class="text-xs text-slate-400">Sessions 25-30</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Deep dive into Spark internals (Driver, Executor, Partitions). Master complex transformations using PySpark DataFrames API instead of SQL. Focus on handling schema evolution and data quality enforcement at the Silver layer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 4 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Month 4: Real-time Streaming</h3>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tool-tag bg-kafka">Kafka</span>
+                            <span class="tool-tag bg-spark">Structured Streaming</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-2 border-slate-100">
+                                <span class="font-bold text-slate-700">Topic: Kafka Ingestion & Spark Streaming</span>
+                                <span class="text-xs text-slate-400">Sessions 37-48</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Setting up Apache Kafka topics. Simulating real-time IoT data. Building Spark Structured Streaming jobs to ingest Kafka events into Delta Lake Bronze tables. Real-time window aggregations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 5 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800">Month 5: Orchestration & DB Ops</h3>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tool-tag bg-airflow">Airflow</span>
+                            <span class="tool-tag bg-sql">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-2 border-slate-100">
+                                <span class="font-bold text-slate-700">Topic: Workflow DAGs & Ingestion Patterns</span>
+                                <span class="text-xs text-slate-400">Sessions 49-60</span>
+                            </div>
+                            <p class="text-sm text-slate-600">Learning Airflow operators. Scheduling pipelines to pull data from PostgreSQL (External) into Databricks. Handling failure retries and sensor-based triggers. Delta Lake performance tuning (Z-Order, Optimize).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 6 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <h3 class="text-xl font-bold text-slate-800 text-blue-600">Month 6: Capstone</h3>
+                        <div class="mt-4">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Graduation</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 bg-blue-900 text-white p-8 rounded-xl shadow-xl border border-blue-800">
+                        <h4 class="text-2xl font-bold mb-4">End-to-End Data Lakehouse System</h4>
+                        <p class="text-blue-100 mb-6">Students will integrate all tools to build a multi-source pipeline (Kafka + SQL DB) into a unified Medallion Lakehouse, orchestrated by Airflow, with real-time monitoring dashboards.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-blue-300">Sessions 61-72</span>
+                            <span class="bg-green-500 text-white px-3 py-1 rounded text-xs font-bold">PORTFOLIO READY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Section -->
+        <section id="methodology" class="pt-10 border-t border-slate-200">
+            <h2 class="text-2xl font-bold mb-10 text-center">Assessment & Teaching Structure</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl text-center border border-slate-200">
+                    <i class="fa-solid fa-chalkboard-user text-3xl text-blue-600 mb-4"></i>
+                    <h4 class="font-bold mb-2">Teaching Style</h4>
+                    <p class="text-sm text-slate-600">Each session follows the 30/70 rule: 30% interactive lecture, 70% supervised coding labs.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl text-center border border-slate-200">
+                    <i class="fa-solid fa-tasks text-3xl text-blue-600 mb-4"></i>
+                    <h4 class="font-bold mb-2">Grading System</h4>
+                    <ul class="text-xs text-slate-500 space-y-1">
+                        <li>Weekly Assignments: 40%</li>
+                        <li>Mini Projects: 20%</li>
+                        <li>Final Capstone: 40%</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl text-center border border-slate-200">
+                    <i class="fa-solid fa-briefcase text-3xl text-blue-600 mb-4"></i>
+                    <h4 class="font-bold mb-2">Career Support</h4>
+                    <p class="text-sm text-slate-600">Resume review for DA/DE roles and interview simulation based on capstone architecture.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-900 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-4">PYfami Academy</h2>
+            <p class="text-slate-400 max-w-xl mx-auto mb-8">This syllabus is designed to meet the rigorous demands of modern data teams. We focus on the engineering patterns, not just the tools.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-slate-400 hover:text-white transition">Documentation</a>
+                <a href="#" class="text-slate-400 hover:text-white transition">Community Hub</a>
+                <a href="#" class="text-slate-400 hover:text-white transition">Contact Instructor</a>
+            </div>
+            <p class="text-xs text-slate-500">&copy; 2024 PYfami | Data Lakehouse Engineering Program. Professional Certification Track.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
