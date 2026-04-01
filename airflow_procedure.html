@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Real Airflow Procedure</title>
+<style>
+body {
+    font-family: Arial;
+    background: #f5f7fa;
+    padding: 20px;
+}
+h1 { text-align: center; }
+
+.step {
+    background: white;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 6px solid #007BFF;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.role {
+    color: #555;
+    font-size: 14px;
+}
+.code {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 10px;
+    margin-top: 10px;
+    font-family: monospace;
+    border-radius: 5px;
+}
+.arrow {
+    text-align: center;
+    font-size: 24px;
+}
+</style>
+</head>
+<body>
+
+<h1>🚀 Real Company Procedure: SMB → Airflow → Cloud</h1>
+
+<div class="step">
+<h2>Step 1: Data Engineer Writes DAG</h2>
+<div class="role">👨‍💻 Role: Data Engineer (DEV environment)</div>
+
+<p>Engineer writes Python code to define the pipeline.</p>
+
+<div class="code">
+def extract():
+    read files from /mnt/mfgtrace/
+
+def upload():
+    send files to ADLS
+
+extract >> upload
+</div>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 2: Save Code to Git</h2>
+<div class="role">👨‍💻 Role: Data Engineer</div>
+
+<p>Code is pushed to repository (version control).</p>
+
+<div class="code">
+git add .
+git commit -m "new airflow DAG"
+git push
+</div>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 3: CI/CD Deploys DAG</h2>
+<div class="role">🤖 Role: Automation (GitHub Actions)</div>
+
+<p>System automatically deploys DAG to Airflow server.</p>
+
+<div class="code">
+on push:
+    copy DAG to airflow/dags/
+</div>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 4: Airflow Detects DAG</h2>
+<div class="role">⚙️ Role: Airflow System</div>
+
+<p>Airflow scans folder and shows DAG in UI.</p>
+
+<p>Now you can:</p>
+<ul>
+<li>Run DAG manually</li>
+<li>Schedule daily job</li>
+<li>Monitor logs</li>
+</ul>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 5: DAG Runs (Production Flow)</h2>
+<div class="role">⚙️ Role: Airflow Scheduler</div>
+
+<p>Every day at 6AM:</p>
+
+<ul>
+<li>Read files from SMB (/mnt/mfgtrace/)</li>
+<li>Upload to Cloud Storage</li>
+<li>Log success</li>
+</ul>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 6: Data Stored in Cloud</h2>
+<div class="role">☁️ Role: Storage System</div>
+
+<p>Files saved like:</p>
+
+<div class="code">
+/adls/mfgtrace/log/2026/04/01/
+</div>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 7: Monitoring & Retry</h2>
+<div class="role">👨‍💻 + ⚙️</div>
+
+<p>If failure:</p>
+<ul>
+<li>Airflow retries automatically</li>
+<li>Engineer checks logs</li>
+</ul>
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>Step 8: Environment Flow</h2>
+
+<p><b>How code moves:</b></p>
+
+<div class="code">
+DEV  → you test DAG
+UAT  → business validates
+PROD → real data runs daily
+</div>
+
+</div>
+
+<div class="arrow">⬇️</div>
+
+<div class="step">
+<h2>🔥 Final Big Picture</h2>
+
+<div class="code">
+Engineer writes DAG
+→ Push to Git
+→ CI/CD deploys
+→ Airflow runs daily
+→ Data moves to Cloud
+→ Monitor & improve
+</div>
+
+</div>
+
+</body>
+</html>
+
