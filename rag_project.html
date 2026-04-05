@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Legal RAG System - Training Page</title>
+<style>
+    body {
+        font-family: Arial;
+        margin: 0;
+        background: #f5f7fa;
+    }
+
+    header {
+        background: #1e293b;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .container {
+        padding: 30px;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .step {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .step h2 {
+        color: #2563eb;
+    }
+
+    pre {
+        background: #111827;
+        color: #22c55e;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+    }
+
+    .flow {
+        text-align: center;
+        font-weight: bold;
+        margin: 30px 0;
+        font-size: 18px;
+    }
+
+    .highlight {
+        color: #dc2626;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Legal RAG System (End-to-End)</h1>
+    <p>Training & Architecture Walkthrough</p>
+</header>
+
+<div class="container">
+
+    <div class="step">
+        <h2>🎯 Goal</h2>
+        <p>
+            Build a system that can:
+            <br>Upload Legal PDF → Ask Questions → Get Answers with Legal References
+        </p>
+    </div>
+
+    <div class="flow">
+        PDF → Parsing → Chunking → Embedding → Vector DB → Query → LLM → Answer
+    </div>
+
+    <div class="step">
+        <h2>🔥 Step 1 — Document Parsing</h2>
+        <p><b>Goal:</b> Convert messy PDF into structured legal data</p>
+
+        <p class="highlight">Key Idea: NOT extracting text → Extracting STRUCTURE</p>
+
+        <pre>
+{
+  "law": "Enterprise Law",
+  "article": 7,
+  "title": "Right to freedom of business",
+  "clauses": [
+    {
+      "clause_id": "7.1",
+      "content": "Enterprises have the right..."
+    }
+  ]
+}
+        </pre>
+
+        <p><b>Tools:</b> pdfplumber, PyMuPDF, unstructured, OCR (Tesseract)</p>
+    </div>
+
+    <div class="step">
+        <h2>🔥 Step 2 — Chunking</h2>
+        <p><b>Goal:</b> Split document into retrievable units</p>
+
+        <pre>
+{
+  "chunk_id": "law_7_1",
+  "text": "Enterprises have the right...",
+  "metadata": {
+    "law": "Enterprise Law",
+    "article": 7,
+    "clause": 1
+  }
+}
+        </pre>
+
+        <p class="highlight">Best Practice: Chunk by CLAUSE (not random text)</p>
+    </div>
+
+<div class="step">
+    <h2>🔥 Step 3 — Embedding (Text → Vector)</h2>
+
+    <p><b>Goal:</b> Convert human language into numbers that AI can understand and compare</p>
+
+    <h3>🧠 What is Embedding?</h3>
+    <p>
+        Embedding is the process of transforming text into a numeric vector.
+        <br><br>
+        AI models (like LLMs) cannot understand text directly — they understand numbers.
+        <br>
+        So we convert text into vectors to capture <b>meaning</b>, not just keywords.
+    </p>
+
+    <h3>📌 Example</h3>
+
+    <pre>
+Text:
+"Enterprises have the right to freely conduct business"
+
+Embedding:
+[0.21, -0.44, 0.88, 0.13, ...]
+    </pre>
+
+    <p class="highlight">
+        Similar meaning → Similar vectors (this is the key idea)
+    </p>
+
+    <h3>🔍 Why Embedding is Powerful</h3>
+
+    <pre>
+User Query:
+"Can businesses operate freely?"
+
+Legal Text:
+"Enterprises have the right to freely conduct business"
+
+👉 Even though words are different,
+👉 Embedding vectors will be CLOSE
+
+→ This enables semantic search
+    </pre>
+
+    <h3>⚙️ How to Implement (Real Code)</h3>
+
+    <pre>
+from sentence_transformers import SentenceTransformer
+
+# Load pretrained embedding model
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+# Convert text to vector
+text = "Enterprises have the right to freely conduct business"
+vector = model.encode(text)
+
+print(vector)
+    </pre>
+
+    <h3>🧰 Common Tools</h3>
+
+    <ul>
+        <li>OpenAI Embeddings API</li>
+        <li>Sentence-Transformers (local, fast)</li>
+        <li>Cohere Embeddings</li>
+    </ul>
+
+    <h3>🤖 How AI Supports This Step</h3>
+
+    <ul>
+        <li>Pretrained transformer models understand language context</li>
+        <li>They capture meaning, not just keywords</li>
+        <li>They map similar sentences close together in vector space</li>
+        <li>They generalize across different wording (semantic understanding)</li>
+    </ul>
+
+    <h3>📊 Visual Intuition (Vector Space)</h3>
+
+    <pre>
+"operate freely"  ●
+                  \
+                   ●  "conduct business freely"
+                  /
+"buy a house"    ●  (far away)
+    </pre>
+
+    <p class="highlight">
+        Distance between vectors = similarity of meaning
+    </p>
+
+    <h3>⚠️ Common Mistakes</h3>
+
+    <ul>
+        <li>Using raw text search instead of embeddings</li>
+        <li>Embedding entire document instead of chunks</li>
+        <li>Ignoring metadata (article, clause)</li>
+    </ul>
+
+    <h3>💡 Key Takeaway</h3>
+
+    <p class="highlight">
+        Embedding is what allows your system to understand meaning — not just match keywords.
+    </p>
+
+</div>
+
+    <div class="step">
+        <h2>🔥 Step 4 — Vector Database</h2>
+        <p><b>Goal:</b> Store vectors for semantic search</p>
+
+        <pre>
+{
+  "vector": [...],
+  "text": "...",
+  "metadata": {
+    "article": 7,
+    "clause": 1
+  }
+}
+        </pre>
+
+        <p><b>Tools:</b> FAISS, Pinecone, Weaviate</p>
+    </div>
+
+    <div class="step">
+        <h2>🔥 Step 5 — User Query Flow</h2>
+
+        <p>User asks:</p>
+        <pre>Can businesses operate freely?</pre>
+
+        <p>System:</p>
+        <ul>
+            <li>Convert query → embedding</li>
+            <li>Search vector DB</li>
+            <li>Return Top-K relevant clauses</li>
+        </ul>
+    </div>
+
+    <div class="step">
+        <h2>🔥 Step 6 — Build Context for LLM</h2>
+
+        <pre>
+Context:
+[Article 7, Clause 1]
+"Enterprises have the right..."
+
+Question:
+Can businesses operate freely?
+        </pre>
+    </div>
+
+    <div class="step">
+        <h2>🔥 Step 7 — Final Answer</h2>
+
+        <pre>
+Yes. According to Article 7, Clause 1 of the Enterprise Law,
+enterprises have the right to freely conduct business
+in industries not prohibited by law.
+        </pre>
+
+        <p class="highlight">Key: ALWAYS include legal citation</p>
+    </div>
+
+    <div class="step">
+        <h2>🚀 Production-Level Features</h2>
+
+        <ul>
+            <li>Structured legal metadata (article, clause)</li>
+            <li>Precise chunking</li>
+            <li>Explainable answers</li>
+            <li>Data quality validation</li>
+        </ul>
+    </div>
+
+    <div class="step">
+        <h2>🚀 Advanced Improvements</h2>
+
+        <ul>
+            <li>Hybrid Search (keyword + vector)</li>
+            <li>Re-ranking (cross encoder)</li>
+            <li>Knowledge Graph</li>
+            <li>Evaluation dataset</li>
+        </ul>
+    </div>
+
+    <div class="step">
+        <h2>🧠 Final Insight</h2>
+
+        <p class="highlight">
+            The hardest part is NOT the LLM — it is structuring legal data correctly.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
