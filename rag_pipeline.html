@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RAG End-to-End for Legal AI (Training Guide)</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.section {
+    background: #1e293b;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.box {
+    border: 2px solid #38bdf8;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+.flow {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0;
+    color: #94a3b8;
+}
+
+.code {
+    background: black;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+.highlight {
+    border-color: #facc15;
+}
+
+.center {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>RAG End-to-End (Legal AI Training)</h1>
+
+<div class="section">
+<h2>1. What is RAG?</h2>
+
+<div class="box">RAG = Retrieval Augmented Generation</div>
+<div class="box">LLM does not guess → it uses your data</div>
+
+<div class="box highlight">
+LLM + Search + Your Knowledge = Accurate Answer
+</div>
+
+</div>
+
+<div class="section">
+<h2>2. Core Flow (Easy to Remember)</h2>
+
+<div class="center">
+Documents → Chunk → Embedding → Vector DB<br>
+↓<br>
+User Query → Embedding → Similarity Search<br>
+↓<br>
+Top-K relevant chunks<br>
+↓<br>
+LLM (GPT / Llama)<br>
+↓<br>
+Final Answer
+</div>
+
+</div>
+
+<div class="section">
+<h2>3. Full Pipeline Overview</h2>
+
+<div class="box">Legal Documents (PDF, Word)</div>
+<div class="flow">↓</div>
+
+<div class="box">Document Parsing (extract structure)</div>
+<div class="flow">↓</div>
+
+<div class="box">Chunking (split by meaning)</div>
+<div class="flow">↓</div>
+
+<div class="box">Embedding (text → vector)</div>
+<div class="flow">↓</div>
+
+<div class="box">Vector Database (store meaning)</div>
+<div class="flow">↓</div>
+
+<div class="box highlight">Search + LLM → Final Answer</div>
+
+</div>
+
+<div class="section">
+<h2>4. Example Input</h2>
+
+<div class="code">
+Điều 5. Quyền của doanh nghiệp
+1. Tự do kinh doanh
+2. Lựa chọn ngành nghề
+</div>
+
+</div>
+
+<div class="section">
+<h2>5. Document Parsing</h2>
+
+<div class="box">Convert document into structured data</div>
+
+<div class="code">
+{
+  "article": 5,
+  "title": "Quyền của doanh nghiệp",
+  "clauses": [
+    {"clause": 1, "text": "Tự do kinh doanh"},
+    {"clause": 2, "text": "Lựa chọn ngành nghề"}
+  ]
+}
+</div>
+
+</div>
+
+<div class="section">
+<h2>6. Chunking</h2>
+
+<div class="box">Split by meaning (not by size)</div>
+
+<div class="code">
+Chunk 1: "Tự do kinh doanh"
+Chunk 2: "Lựa chọn ngành nghề"
+</div>
+
+</div>
+
+<div class="section">
+<h2>7. Metadata</h2>
+
+<div class="box">Add context for accuracy</div>
+
+<div class="code">
+{
+  "text": "Tự do kinh doanh",
+  "metadata": {
+    "law": "Luật doanh nghiệp",
+    "article": 5,
+    "clause": 1
+  }
+}
+</div>
+
+</div>
+
+<div class="section">
+<h2>8. Embedding</h2>
+
+<div class="box">Convert text into vector (meaning)</div>
+
+<div class="code">
+"Tự do kinh doanh"
+→ [0.21, -0.44, 0.88, ...]
+</div>
+
+</div>
+
+<div class="section">
+<h2>9. Vector Database</h2>
+
+<div class="box">Store vectors for semantic search</div>
+
+<div class="box highlight">
+Similar meaning → similar vectors
+</div>
+
+</div>
+
+<div class="section">
+<h2>10. Query Flow</h2>
+
+<div class="code">
+User: "Công ty được làm gì?"
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box">Convert query → vector</div>
+<div class="flow">↓</div>
+
+<div class="box">Search similar vectors</div>
+<div class="flow">↓</div>
+
+<div class="box">Retrieve relevant chunks</div>
+
+</div>
+
+<div class="section">
+<h2>11. LLM Generation</h2>
+
+<div class="box">LLM receives context + question</div>
+
+<div class="code">
+Context: "Tự do kinh doanh"
+Question: "Công ty được làm gì?"
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box highlight">
+Final Answer:
+</div>
+
+<div class="code">
+Doanh nghiệp có quyền tự do kinh doanh theo Điều 5.
+</div>
+
+</div>
+
+<div class="section">
+<h2>12. Simple Code Example</h2>
+
+<div class="code">
+from sentence_transformers import SentenceTransformer
+import faiss
+import numpy as np
+
+texts = ["Tự do kinh doanh", "Lựa chọn ngành nghề"]
+
+model = SentenceTransformer('all-MiniLM-L6-v2')
+embeddings = model.encode(texts)
+
+index = faiss.IndexFlatL2(embeddings.shape[1])
+index.add(np.array(embeddings))
+
+query = "Công ty được làm gì?"
+q_vec = model.encode([query])
+
+D, I = index.search(q_vec, k=1)
+
+print(texts[I[0][0]])
+</div>
+
+</div>
+
+<div class="section">
+<h2>13. System Flow Summary</h2>
+
+<div class="code">
+User Query
+↓
+Embedding
+↓
+Vector DB Search
+↓
+Top-K Results
+↓
+LLM
+↓
+Final Answer
+</div>
+
+</div>
+
+<div class="section">
+<h2>14. Key Takeaways</h2>
+
+<div class="box">RAG = Search + LLM</div>
+<div class="box">Vector DB = understand meaning</div>
+<div class="box">Metadata = accuracy</div>
+<div class="box highlight">Chunk by logic, not by length</div>
+
+</div>
+
+<div class="section">
+<h2>15. One Sentence</h2>
+
+<div class="box highlight">
+RAG = Give the right knowledge → Get the right answer
+</div>
+
+</div>
+
+</body>
+</html>
