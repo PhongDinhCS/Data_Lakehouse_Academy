@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Production RAG Architecture</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #020617;
+    color: white;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.section {
+    background: #0f172a;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.box {
+    border: 2px solid #22c55e;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+.flow {
+    text-align: center;
+    margin: 10px 0;
+    color: #94a3b8;
+}
+
+.code {
+    background: black;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+.highlight {
+    border-color: #facc15;
+}
+
+.warning {
+    border-color: #ef4444;
+}
+
+.center {
+    text-align: center;
+    line-height: 1.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Production RAG Architecture</h1>
+
+<div class="section">
+<h2>1. Big Picture</h2>
+
+<div class="center">
+Offline Pipeline (Build Knowledge)<br>
++<br>
+Online Pipeline (Serve User)
+</div>
+
+</div>
+
+<div class="section">
+<h2>2. Full System Flow</h2>
+
+<div class="center">
+DOCUMENT PIPELINE<br>
+Documents → Parsing → Chunk → Embedding → Vector DB<br>
+<br>
+QUERY PIPELINE<br>
+User Query → Embedding → Retrieval → Ranking → LLM → Answer
+</div>
+
+</div>
+
+<div class="section">
+<h2>3. Architecture Layers</h2>
+
+<div class="box">1. Data Ingestion Layer</div>
+<div class="box">2. Processing Layer (Parsing + Chunking)</div>
+<div class="box">3. Embedding Layer</div>
+<div class="box">4. Storage Layer (Vector DB + Metadata DB)</div>
+<div class="box">5. Retrieval Layer</div>
+<div class="box">6. LLM Layer</div>
+<div class="box highlight">7. Feedback & Monitoring Layer</div>
+
+</div>
+
+<div class="section">
+<h2>4. Offline Pipeline (Build Knowledge)</h2>
+
+<div class="flow">Documents</div>
+
+<div class="box">PDF / Word / HTML</div>
+<div class="flow">↓</div>
+
+<div class="box">Parsing (extract structure)</div>
+<div class="flow">↓</div>
+
+<div class="box">Chunking (split meaningful units)</div>
+<div class="flow">↓</div>
+
+<div class="box">Metadata Enrichment</div>
+<div class="flow">↓</div>
+
+<div class="box">Embedding</div>
+<div class="flow">↓</div>
+
+<div class="box highlight">Store in Vector DB</div>
+
+</div>
+
+<div class="section">
+<h2>5. Online Pipeline (User Query)</h2>
+
+<div class="code">
+User: "Công ty được làm gì?"
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box">Query Embedding</div>
+<div class="flow">↓</div>
+
+<div class="box">Vector Search (Top-K)</div>
+<div class="flow">↓</div>
+
+<div class="box">Re-ranking (optional but important)</div>
+<div class="flow">↓</div>
+
+<div class="box">Build Context</div>
+<div class="flow">↓</div>
+
+<div class="box highlight">LLM Generate Answer</div>
+
+</div>
+
+<div class="section">
+<h2>6. Hybrid Search (Production MUST HAVE)</h2>
+
+<div class="box">Vector Search → hiểu nghĩa</div>
+<div class="box">Keyword Search → match chính xác</div>
+
+<div class="code">
+Final Score = 0.7 * vector + 0.3 * keyword
+</div>
+
+<div class="highlight box">
+Best practice: Always combine BOTH
+</div>
+
+</div>
+
+<div class="section">
+<h2>7. Re-Ranking Layer</h2>
+
+<div class="box">Filter results again before LLM</div>
+
+<div class="code">
+Top 10 → Re-rank → Keep Top 3
+</div>
+
+<div class="box highlight">
+Giúp giảm sai + tăng độ chính xác
+</div>
+
+</div>
+
+<div class="section">
+<h2>8. Context Building</h2>
+
+<div class="box">Combine chunks into prompt</div>
+
+<div class="code">
+Context:
+- Điều 5: Tự do kinh doanh
+- Điều 6: Nghĩa vụ doanh nghiệp
+
+Question:
+"Công ty được làm gì?"
+</div>
+
+</div>
+
+<div class="section">
+<h2>9. LLM Layer</h2>
+
+<div class="box">Input = Context + Question</div>
+
+<div class="flow">↓</div>
+
+<div class="box highlight">
+Output = Final Answer (grounded)
+</div>
+
+</div>
+
+<div class="section">
+<h2>10. Metadata Storage</h2>
+
+<div class="code">
+{
+  "text": "Tự do kinh doanh",
+  "law": "Luật doanh nghiệp",
+  "article": 5,
+  "clause": 1
+}
+</div>
+
+<div class="box">
+Metadata giúp:
+- Filter chính xác
+- Explain answer
+</div>
+
+</div>
+
+<div class="section">
+<h2>11. Feedback Loop (Production Level)</h2>
+
+<div class="box">User feedback</div>
+<div class="flow">↓</div>
+
+<div class="box">Log queries + answers</div>
+<div class="flow">↓</div>
+
+<div class="box">Improve retrieval / prompt</div>
+
+<div class="highlight box">
+System becomes smarter over time
+</div>
+
+</div>
+
+<div class="section">
+<h2>12. Monitoring</h2>
+
+<div class="box">Latency</div>
+<div class="box">Accuracy</div>
+<div class="box">Search quality</div>
+
+<div class="warning box">
+If no monitoring → system will fail silently
+</div>
+
+</div>
+
+<div class="section">
+<h2>13. Common Mistakes</h2>
+
+<div class="warning box">Chunk too big → mất chính xác</div>
+<div class="warning box">No metadata → trả lời sai context</div>
+<div class="warning box">Only vector search → miss keyword</div>
+<div class="warning box">No re-ranking → noise cao</div>
+
+</div>
+
+<div class="section">
+<h2>14. Simple Mental Model</h2>
+
+<div class="highlight box">
+Search Engine + Brain
+</div>
+
+<div class="box">
+Search Engine = Vector DB + Retrieval<br>
+Brain = LLM
+</div>
+
+</div>
+
+<div class="section">
+<h2>15. One Sentence</h2>
+
+<div class="highlight box">
+Production RAG = Clean Data + Smart Search + Controlled LLM
+</div>
+
+</div>
+
+</body>
+</html>
