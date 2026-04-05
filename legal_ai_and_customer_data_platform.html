@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Legal AI + CDP Architecture</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.platform {
+    width: 48%;
+}
+
+.platform h2 {
+    text-align: center;
+}
+
+/* Layer */
+.layer {
+    border-radius: 10px;
+    padding: 12px;
+    margin: 6px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* AI color */
+.ai .layer {
+    border: 2px solid #38bdf8;
+    background: #1e293b;
+}
+
+/* CDP color */
+.cdp .layer {
+    border: 2px solid #c084fc;
+    background: #1e293b;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.tools {
+    font-size: 11px;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Arrow */
+.arrow {
+    text-align: center;
+    font-size: 18px;
+    color: #64748b;
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: 5px;
+}
+
+.rt { background: #22c55e; }
+.batch { background: #facc15; color: black; }
+
+/* Highlight */
+.highlight {
+    border-color: #facc15 !important;
+}
+
+/* Global */
+.global-layer {
+    border: 2px dashed #facc15;
+    padding: 12px;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 1px solid #334155;
+    font-size: 13px;
+    color: #cbd5f5;
+    text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Legal AI + Customer Data Platform</h1>
+
+<div class="wrapper">
+
+<!-- LEGAL AI -->
+<div class="platform ai">
+<h2>🔵 Legal AI</h2>
+
+<div class="layer">
+<div class="title">Legal Sources</div>
+<div class="tools">Law, contracts, docs</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Ingestion</div>
+<div class="tools">Airflow pipelines</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Raw Data Lake</div>
+<div class="tools">S3 / GCS</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Processing <span class="badge batch">Batch</span></div>
+<div class="tools">Parsing, NLP</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Structured Data</div>
+<div class="tools">Warehouse</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer highlight">
+<div class="title">Serving Layer</div>
+<div class="tools">Search + Vector + Graph</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer highlight">
+<div class="title">RAG / LLM</div>
+<div class="tools">Answer generation</div>
+</div>
+
+</div>
+
+<!-- CDP -->
+<div class="platform cdp">
+<h2>🟣 CDP</h2>
+
+<div class="layer">
+<div class="title">User Events</div>
+<div class="tools">Click, search</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Streaming <span class="badge rt">Real-time</span></div>
+<div class="tools">Kafka</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Processing</div>
+<div class="tools">Flink (RT) + Spark (Batch)</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Data Warehouse</div>
+<div class="tools">BigQuery / Snowflake</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer">
+<div class="title">Analytics</div>
+<div class="tools">BI dashboards</div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="layer highlight">
+<div class="title">Segmentation</div>
+<div class="tools">User scoring</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- GLOBAL -->
+<div class="global-layer">
+<strong>Data Governance</strong><br>
+Quality • Lineage • Catalog
+</div>
+
+<div class="global-layer">
+<strong>FinOps</strong><br>
+Cost control • Optimization
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+Legal AI transforms raw legal documents into intelligent answers using structured data and RAG.
+CDP captures user behavior to generate insights and segmentation.
+Both systems are independent but can integrate to create personalization and feedback loops.
+</div>
+
+</body>
+</html>
