@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vector Database Training</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #020617;
+    color: white;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.section {
+    background: #0f172a;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.box {
+    border: 2px solid #38bdf8;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+.flow {
+    text-align: center;
+    margin: 10px 0;
+    color: #94a3b8;
+}
+
+.code {
+    background: black;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+.highlight {
+    border-color: #facc15;
+}
+
+.warning {
+    border-color: #ef4444;
+}
+
+.ai {
+    border-color: #22c55e;
+}
+
+.center {
+    text-align: center;
+    line-height: 1.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Vector Database Training</h1>
+
+<div class="section">
+<h2>1. What is Vector DB?</h2>
+
+<div class="box">
+Vector DB = Database that stores vectors (numbers)
+</div>
+
+<div class="highlight box">
+⚠️ Vector DB DOES NOT understand text
+</div>
+
+<div class="box ai">
+👉 AI Embedding Model = the part that understands meaning
+</div>
+
+</div>
+
+<div class="section">
+<h2>2. Full Flow (IMPORTANT)</h2>
+
+<div class="center">
+Text<br>
+↓<br>
+<span style="color:#22c55e;">Embedding Model (AI)</span><br>
+↓<br>
+Vector (numbers)<br>
+↓<br>
+Vector DB (store & search)
+</div>
+
+<div class="highlight box">
+AI understands → Vector DB searches
+</div>
+
+</div>
+
+<div class="section">
+<h2>3. Example</h2>
+
+<div class="code">
+Text 1: "Tự do kinh doanh"
+Text 2: "Doanh nghiệp được phép hoạt động"
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box ai">
+Embedding Model converts text → vectors
+</div>
+
+<div class="code">
+Vector 1: [0.21, -0.44, ...]
+Vector 2: [0.20, -0.40, ...]
+</div>
+
+<div class="highlight box">
+Vectors are close → meaning is similar
+</div>
+
+</div>
+
+<div class="section">
+<h2>4. How Vector DB Works</h2>
+
+<div class="center">
+Store vectors<br>
+↓<br>
+User query → convert to vector (using AI)<br>
+↓<br>
+Find nearest vectors (math only)<br>
+↓<br>
+Return similar meaning
+</div>
+
+<div class="warning box">
+Vector DB only uses math (NOT AI)
+</div>
+
+</div>
+
+<div class="section">
+<h2>5. Compare: Vector DB vs PostgreSQL</h2>
+
+<div class="box highlight">
+PostgreSQL = exact match
+</div>
+
+<div class="box highlight">
+Vector DB = semantic match (via embedding)
+</div>
+
+<div class="code">
+PostgreSQL:
+SELECT * WHERE text = "kinh doanh"
+
+Vector DB:
+Search("công ty được làm gì")
+→ finds similar meaning
+</div>
+
+</div>
+
+<div class="section">
+<h2>6. Key Architecture (Correct Design)</h2>
+
+<div class="center">
+Text → Embedding Model → Vector DB
+</div>
+
+<div class="highlight box">
+❌ WRONG: Vector DB understands text<br>
+✅ RIGHT: Embedding Model understands text
+</div>
+
+</div>
+
+<div class="section">
+<h2>7. Real Use Case (Legal AI)</h2>
+
+<div class="code">
+User: "Công ty được làm gì?"
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box ai">
+Embedding model converts query → vector
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box">
+Vector DB finds closest meaning
+</div>
+
+<div class="flow">↓</div>
+
+<div class="box">
+Return: "Tự do kinh doanh"
+</div>
+
+</div>
+
+<div class="section">
+<h2>8. Tools (Popular Vector DB)</h2>
+
+<div class="box">FAISS (local, fast)</div>
+<div class="box">Weaviate (auto embedding option)</div>
+<div class="box">Pinecone (managed)</div>
+<div class="box">Milvus (scalable)</div>
+
+<div class="warning box">
+Some tools hide embedding step → but it still exists
+</div>
+
+</div>
+
+<div class="section">
+<h2>9. Code Example (Clear Separation)</h2>
+
+<div class="code">
+# Step 1: Embedding (AI)
+from sentence_transformers import SentenceTransformer
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+texts = ["Tự do kinh doanh"]
+vectors = model.encode(texts)
+
+# Step 2: Store in Vector DB
+import faiss
+import numpy as np
+
+index = faiss.IndexFlatL2(vectors.shape[1])
+index.add(np.array(vectors))
+
+# Step 3: Query
+query = "Công ty được làm gì?"
+q_vec = model.encode([query])
+
+D, I = index.search(q_vec, k=1)
+</div>
+
+</div>
+
+<div class="section">
+<h2>10. Applying in System</h2>
+
+<div class="center">
+Documents → Chunk → <span style="color:#22c55e;">Embedding Model</span> → Vector DB<br>
+↓<br>
+User Query → <span style="color:#22c55e;">Embedding Model</span> → Search → Result
+</div>
+
+<div class="highlight box">
+Embedding is REQUIRED step
+</div>
+
+</div>
+
+<div class="section">
+<h2>11. Common Mistakes</h2>
+
+<div class="warning box">Think Vector DB understands text</div>
+<div class="warning box">Skip embedding step</div>
+<div class="warning box">Use bad embedding model</div>
+
+</div>
+
+<div class="section">
+<h2>12. Key Takeaways</h2>
+
+<div class="box">Embedding Model = brain</div>
+<div class="box">Vector DB = search engine</div>
+<div class="box highlight">Both are required</div>
+
+</div>
+
+<div class="section">
+<h2>13. One Sentence</h2>
+
+<div class="highlight box">
+AI understands meaning → Vector DB finds similar meaning
+</div>
+
+</div>
+
+</body>
+</html>
